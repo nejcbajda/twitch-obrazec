@@ -1,0 +1,305 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  background: #0e0e10;
+}
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #efeff1;
+  background: #0e0e10;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  padding: 24px;
+}
+
+
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+  padding: 32px 30px 26px;
+  background: #18181b;
+  border-radius: 6px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65);
+}
+
+.logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 14px;
+  fill: #9147ff;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/*Zavihka Prijava in Registracija*/
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #3a3a3d;
+  margin-bottom: 24px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  margin-bottom: -1px;
+  text-align: center;
+  font-weight: 600;
+  color: #adadb8;
+  border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+  color: #bf94ff;
+  text-decoration: none;
+}
+
+.tab.active {
+  color: #bf94ff;
+  border-bottom-color: #9147ff;
+}
+
+/*Vrstice in  ploja*/
+
+.field {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input, select {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 16px;
+  color: #efeff1;
+  background: #0e0e10;
+  border: 2px solid #3a3a3d;
+  border-radius: 6px;
+  transition: border-color 0.1s, box-shadow 0.1s;
+}
+
+input::placeholder {
+  color: #adadb8;
+}
+
+input:hover, select:hover {
+  border-color: #53535f;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #9147ff;
+  box-shadow: 0 0 6px rgba(145, 71, 255, 0.6);
+}
+
+.field.invalid input, .field.invalid select {
+  border-color: #ff8280;
+}
+
+select {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+select option {
+  background: #18181b;
+  color: #efeff1;
+}
+
+/* napake */
+
+.hint, .error {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.hint {
+  color: #adadb8;
+}
+
+.error {
+  display: none;
+  color: #ff8280;
+}
+
+.field.invalid .error {
+  display: block;
+}
+
+.field.invalid .hint {
+  display: none;
+}
+
+/*Geslo z ikono*/
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input {
+  padding-right: 44px;
+}
+
+.eye {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  color: #adadb8;
+  cursor: pointer;
+}
+
+.eye:hover {
+  color: #efeff1;
+}
+
+.eye svg {
+  width: 20px;
+  height: 20px;
+}
+
+.eye .slash {
+  display: none;
+}
+
+.eye.on .slash {
+  display: inline;
+}
+
+/*Datum rojstva, telefon in povezave*/
+
+.dob {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 10px;
+}
+
+.phone-row {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 10px;
+}
+
+.link-btn {
+  margin-top: 10px;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  color: #bf94ff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/*Gumb Reg*/
+
+.btn-primary {
+  width: 100%;
+  height: 40px;
+  margin-top: 4px;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #9147ff;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+}
+
+.btn-primary:hover {
+  background: #772ce8;
+}
+
+.btn-primary:active {
+  background: #5c16c5;
+  transform: scale(0.99);
+}
+
+.terms {
+  margin-top: 18px;
+  font-size: 12px;
+  text-align: center;
+  color: #adadb8;
+}
+
+a {
+  color: #bf94ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 2px solid #9147ff;
+  outline-offset: 2px;
+}
+
+/*SweetAlert2*/
+
+.swal2-popup {
+  font-family: "Inter", Arial, sans-serif;
+  border-radius: 6px;
+}
+
+.swal2-popup .swal2-styled {
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+/*telefon*/
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .modal {
+    padding: 24px 18px 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .dob {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dob select {
+    grid-column: 1 / -1;
+  }
+}

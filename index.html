@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registracija - Twitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="modal" aria-labelledby="modal-title">
+    <svg class="logo" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+    </svg>
+    <h1 id="modal-title">Pridruži se Twitchu še danes</h1>
+
+    <nav class="tabs">
+      <a href="#" class="tab" id="tab-login">Prijava</a>
+      <a href="#" class="tab active" aria-current="page">Registracija</a>
+    </nav>
+
+    <!-- Obrazec in uporabniško ime -->
+    <form id="signup-form" novalidate>
+      <div class="field">
+        <label for="username">Uporabniško ime</label>
+        <input type="text" id="username" name="username" maxlength="25" autocomplete="username" spellcheck="false">
+        <p class="hint">S tem imenom te bodo ljudje poznali na Twitchu. Ime lahko vedno spremeniš pozneje.</p>
+        <p class="error"></p>
+      </div>
+      <div class="field">
+        <label for="password">Geslo</label>
+        <div class="input-wrap">
+          <input type="password" id="password" name="password" autocomplete="new-password">
+          <button type="button" class="eye" id="toggle-password" aria-label="Pokaži geslo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+              <line class="slash" x1="2" y1="2" x2="22" y2="22"/>
+            </svg>
+          </button>
+        </div>
+        <p class="hint">Uporabi močno geslo z vsaj 8 znaki.</p>
+        <p class="error"></p>
+      </div>
+
+
+      <div class="field">
+        <label for="month">Datum rojstva</label>
+        <div class="dob">
+          <select id="month" name="month">
+            <option value="">Mesec</option>
+            <option value="1">Januar</option><option value="2">Februar</option><option value="3">Marec</option><option value="4">April</option>
+            <option value="5">Maj</option><option value="6">Junij</option><option value="7">Julij</option><option value="8">Avgust</option>
+            <option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">December</option>
+          </select>
+          <input type="text" id="day" name="day" placeholder="Dan" inputmode="numeric" maxlength="2" autocomplete="bday-day">
+          <input type="text" id="year" name="year" placeholder="Leto" inputmode="numeric" maxlength="4" autocomplete="bday-year">
+        </div>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" id="phone-field">
+        <label for="phone">Telefonska številka</label>
+        <div class="phone-row">
+          <select id="country" name="country" aria-label="Klicna koda države">
+            <option value="+386">SI +386</option><option value="+385">HR +385</option><option value="+43">AT +43</option><option value="+39">IT +39</option>
+            <option value="+36">HU +36</option><option value="+49">DE +49</option><option value="+44">GB +44</option><option value="+1">US +1</option>
+          </select>
+          <input type="tel" id="phone" name="phone" placeholder="Telefonska številka" inputmode="tel" autocomplete="tel-national">
+        </div>
+        <p class="error"></p>
+        <button type="button" class="link-btn" id="use-email">Raje uporabi e-pošto</button>
+      </div>
+
+      <div class="field" id="email-field" hidden>
+        <label for="email">E-pošta</label>
+        <input type="email" id="email" name="email" placeholder="E-poštni naslov" autocomplete="email">
+        <p class="error"></p>
+        <button type="button" class="link-btn" id="use-phone">Raje uporabi telefon</button>
+      </div>
+
+      <button type="submit" class="btn-primary">Registriraj se</button>
+      <p class="terms">Z klikom na Registriraj se potrjuješ, da sprejemaš <a href="#" id="terms-link">Pogoje uporabe</a> in <a href="#" id="privacy-link">Obvestilo o zasebnosti</a>.</p>
+    </form>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="script.js"></script>
+</body>
+</html>
