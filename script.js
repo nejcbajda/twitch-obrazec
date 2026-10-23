@@ -1,4 +1,5 @@
 const form = document.getElementById("signup-form");
+const loginForm = document.getElementById("login-form");
 let useEmail = false;
 
 
@@ -17,7 +18,7 @@ function showError(inputId, message) {
 }
 
 function clearErrors() {
-  form.querySelectorAll(".field").forEach((field) => field.classList.remove("invalid"));
+  document.querySelectorAll(".field").forEach((field) => field.classList.remove("invalid"));
 }
 
 
@@ -129,17 +130,21 @@ function setContactMode(email) {
 document.getElementById("use-email").addEventListener("click", () => setContactMode(true));
 document.getElementById("use-phone").addEventListener("click", () => setContactMode(false));
 //Prikaz in skrivanje gesla
-document.getElementById("toggle-password").addEventListener("click", (event) => {
-  const input = document.getElementById("password");
-  const show = input.type === "password";
-  input.type = show ? "text" : "password";
-  event.currentTarget.classList.toggle("on", show);
-  event.currentTarget.setAttribute("aria-label", show ? "Skrij geslo" : "Pokaži geslo");
+document.querySelectorAll(".eye").forEach((button) => {
+  button.addEventListener("click", () => {
+    const input = document.getElementById(button.dataset.target);
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    button.classList.toggle("on", show);
+    button.setAttribute("aria-label", show ? "Skrij geslo" : "Pokaži geslo");
+  });
 });
 
 // 9. Pomoč pri vnosu
-form.addEventListener("input", (event) => {
-  event.target.closest(".field").classList.remove("invalid");
+[form, loginForm].forEach((f) => {
+  f.addEventListener("input", (event) => {
+    event.target.closest(".field").classList.remove("invalid");
+  });
 });
 
 ["day", "year"].forEach((id) => {
@@ -159,5 +164,74 @@ function showInfo(event, title, text) {
 }
 
 document.getElementById("terms-link").addEventListener("click", (event) => showInfo(event, "Pogoji uporabe", "To je šolski projekt. Pravi račun se ne ustvari in noben podatek se ne pošlje."));
+document.getElementById("terms-link-login").addEventListener("click", (event) => showInfo(event, "Pogoji uporabe", "To je šolski projekt. Pravi račun se ne ustvari in noben podatek se ne pošlje."));
 document.getElementById("privacy-link").addEventListener("click", (event) => showInfo(event, "Obvestilo o zasebnosti", "Vse, kar vpišeš, ostane v tvojem brskalniku. Stran nima strežnika."));
-document.getElementById("tab-login").addEventListener("click", (event) => showInfo(event, "Prijava", "Ta šolski projekt vsebuje samo obrazec za registracijo."));
+
+document.getElementById("forgot-password").addEventListener("click", () => {
+  twitchSwal.fire({ icon: "info", title: "Pozabljeno geslo", text: "V tem šolskem projektu obnovitev gesla ni na voljo." });
+});
+
+//Preklop med prijavo in registracijo
+const tabLogin = document.getElementById("tab-login");
+const tabSignup = document.getElementById("tab-signup");
+const title = document.getElementById("modal-title");
+
+function showTab(login) {
+  loginForm.hidden = !login;
+  form.hidden = login;
+  tabLogin.classList.toggle("active", login);
+  tabSignup.classList.toggle("active", !login);
+  tabLogin.toggleAttribute("aria-current", login);
+  tabSignup.toggleAttribute("aria-current", !login);
+  if (login) tabLogin.setAttribute("aria-current", "page");
+  else tabSignup.setAttribute("aria-current", "page");
+  title.textContent = login ? "Prijava v Twitch" : "Pridruži se Twitchu še danes";
+  clearErrors();
+}
+
+tabLogin.addEventListener("click", (event) => { event.preventDefault(); showTab(true); });
+tabSignup.addEventListener("click", (event) => { event.preventDefault(); showTab(false); });
+
+//Preverjanje in oddaja prijave
+loginForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  clearErrors();
+  let valid = true;
+
+  const username = document.getElementById("login-username").value.trim();
+  if (username.length < 4) {
+    showError("login-username", "Vnesi uporabniško ime (vsaj 4 znake).");
+    valid = false;
+  }
+  if (document.getElementById("login-password").value.length < 8) {
+    showError("login-password", "Geslo mora imeti vsaj 8 znakov.");
+    valid = false;
+  }
+
+  if (!valid) {
+    twitchSwal.fire({ icon: "error", title: "Napaka!", text: "Popravi označena polja in poskusi znova." });
+    return;
+  }
+
+  await twitchSwal.fire({
+    icon: "success",
+    title: `Pozdravljen, ${username}!`,
+    text: "Prijava je uspela.",
+    timer: 2000,
+    timerProgressBar: true,
+    showConfirmButton: false,
+  });
+  loginForm.reset();
+});
+
+
+//Gumbi za prijavo prek Googla, Appla in Facebooka
+document.querySelectorAll(".social-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    twitchSwal.fire({
+      icon: "info",
+      title: button.dataset.provider,
+      text: `Prijava prek storitve ${button.dataset.provider} v tem šolskem projektu ni na voljo.`,
+    });
+  });
+});

@@ -222,6 +222,12 @@ select option {
   text-decoration: underline;
 }
 
+/*Skrivanje obrazcev (atribut hidden)*/
+
+[hidden] {
+  display: none !important;
+}
+
 /*Gumb Reg*/
 
 .btn-primary {
@@ -266,6 +272,55 @@ a:hover {
 :focus-visible {
   outline: 2px solid #9147ff;
   outline-offset: 2px;
+}
+
+/*Prijava prek drugih storitev*/
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 16px;
+  font-size: 12px;
+  color: #adadb8;
+}
+
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #3a3a3d;
+}
+
+.social {
+  display: grid;
+  gap: 10px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 40px;
+  font: inherit;
+  font-weight: 600;
+  color: #efeff1;
+  background: #26262c;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.social-btn:hover {
+  background: #3a3a3d;
+}
+
+.social-btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 /*SweetAlert2*/
